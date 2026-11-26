@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VisualMath V3 - Funciones que se ven. Plataforma educativa interactiva con animaciones en vivo de Matemáticas y Física para el Concurso de Ciencias Básicas.">
+  <title>VisualMath V3 — Funciones que se ven</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/src/iconos/css/all.min.css">
+</head>
+<body>
+  <a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+  <!-- Encabezado fijo (Sticky Header) -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 40 40" width="38" height="38" role="img" aria-label="Logotipo de onda matemática VisualMath V4">
+            <defs>
+              <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#6c5ce7"/>
+                <stop offset="100%" stop-color="#00cec9"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="2" width="36" height="36" rx="11" fill="url(#logoGrad)"/>
+            <path d="M7 22 Q13 8, 20 20 T33 18" fill="none" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round"/>
+            <circle cx="20" cy="20" r="3" fill="#ffffff"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">VisualMath <span class="badge-v3">V4</span></h1>
+          <p class="brand-subtitle">Funciones que se ven · Ciencias Básicas</p>
+        </div>
+      </div>
+
+      <!-- Buscador global de temas -->
+      <div class="search-wrapper" role="search">
+        <label for="buscador-temas" class="sr-only">Buscar tema de matemáticas o física</label>
+        <input
+          type="search"
+          id="buscador-temas"
+          class="search-input"
+          placeholder="Buscar temas (ej. derivada, péndulo, Gauss...)"
+          autocomplete="off"
+          aria-expanded="false"
+          aria-controls="resultados-busqueda"
+        >
+        <span class="search-icon" aria-hidden="true">
+          <i class="fa-solid fa-magnifying-glass fa-beat-fade" style="color: rgb(255, 212, 59)"></i>
+        </span>
+        <ul id="resultados-busqueda" class="search-results" role="listbox" aria-label="Resultados de búsqueda" hidden></ul>
+      </div>
+
+      <!-- Selector de modo claro / oscuro -->
+      <div class="header-actions">
+        <button
+          type="button"
+          id="btn-tema"
+          class="btn-pill btn-theme"
+          aria-label="Cambiar entre modo oscuro y modo claro"
+          aria-pressed="false"
+        >
+          <span id="icono-tema" aria-hidden="true">☀️</span>
+          <span id="texto-tema">Modo Claro</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menú de pestañas principal -->
+    <nav class="main-nav" aria-label="Secciones principales de VisualMath V4">
+      <div class="tabs-bar" role="tablist">
+        <button type="button" class="tab-btn active" role="tab" id="tab-matematicas" aria-selected="true" aria-controls="panel-simulador" data-tab="matematicas">
+          <span class="tab-icon" aria-hidden="true">
+            <i class="fa-solid fa-calculator fa-swing" style="color: rgb(255, 212, 59);"></i>
+          <span>1. Matemáticas</span>
+          <span class="tab-count" id="count-mat">32</span>
+        </button>
+        <button type="button" class="tab-btn" role="tab" id="tab-fisica" aria-selected="false" aria-controls="panel-simulador" data-tab="fisica">
+          <span class="tab-icon" aria-hidden="true">
+            <i class="fa-solid fa-atom fa-spin-pulse" style="color: rgb(255, 212, 59);"></i>
+          </span>
+          <span>2. Física</span>
+          <span class="tab-count" id="count-fis">27</span>
+        </button>
+        <button type="button" class="tab-btn" role="tab" id="tab-facil" aria-selected="false" aria-controls="panel-facil" data-tab="facil">
+          <span class="tab-icon" aria-hidden="true">
+            <i class="fa-solid fa-lightbulb fa-bounce" style="color: rgb(255, 212, 59);"></i></span>
+          <span>3. Modo Fácil</span>
+        </button>
+        <button type="button" class="tab-btn" role="tab" id="tab-quiz" aria-selected="false" aria-controls="panel-quiz" data-tab="quiz">
+          <span class="tab-icon" aria-hidden="true">
+            <i class="fa-solid fa-trophy fa-spin-snap" style="color: rgb(255, 212, 59);"></i></span>
+          <span>4. Quiz</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Contenido principal -->
+  <main id="contenido-principal" class="main-container">
+    <!-- Banner introductorio compacto -->
+    <section class="hero-strip fade-in" aria-label="Resumen de la plataforma">
+      <div class="hero-copy">
+        <h2 id="hero-titulo">Entiende Matemáticas viendo cómo se mueven</h2>
+        <p id="hero-descripcion">Mueve los deslizadores A, B y C y observa en tiempo real cómo cambia la gráfica, la fórmula y su significado en la vida cotidiana.</p>
+      </div>
+      <div class="hero-stats" aria-label="Estadísticas de contenido">
+        <div class="stat-chip">
+          <strong id="stat-total">59</strong>
+          <span>Temas animados</span>
+        </div>
+        <div class="stat-chip">
+          <strong>60 FPS</strong>
+          <span>Tiempo real</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PANEL 1 y 2: SIMULADOR (Matemáticas y Física) -->
+    <section id="panel-simulador" class="tab-panel active fade-in" role="tabpanel" aria-labelledby="tab-matematicas">
+      <div class="sim-layout">
+        <!-- Columna 1: Selectores y controles A, B, C -->
+        <aside class="card controls-card" aria-label="Panel de configuración y parámetros">
+          <div class="card-header">
+            <span class="pill-tag" id="etiqueta-materia">Matemáticas</span>
+            <span class="pill-tag pill-level" id="etiqueta-nivel">Básico</span>
+          </div>
+
+          <div class="selector-group">
+            <label for="select-nivel" class="field-label">Nivel académico</label>
+            <select id="select-nivel" class="styled-select">
+              <option value="basico">Nivel Básico / Propedéutico</option>
+              <option value="intermedio">Nivel Intermedio / Tronco Común</option>
+              <option value="avanzado">Nivel Avanzado / Especialidad</option>
+            </select>
+          </div>
+
+          <div class="selector-group">
+            <label for="select-tema" class="field-label">Tema animado</label>
+            <select id="select-tema" class="styled-select"></select>
+          </div>
+
+          <hr class="divider">
+
+          <!-- Sliders A, B, C -->
+          <div class="sliders-stack" role="group" aria-label="Parámetros interactivos A, B y C">
+            <div class="slider-control">
+              <div class="slider-header">
+                <label for="slider-a" id="label-a" class="slider-label">Parámetro A</label>
+                <output for="slider-a" id="val-a" class="slider-value">1.0</output>
+              </div>
+              <input type="range" id="slider-a" class="custom-slider" min="-5" max="5" step="0.1" value="1">
+            </div>
+
+            <div class="slider-control">
+              <div class="slider-header">
+                <label for="slider-b" id="label-b" class="slider-label">Parámetro B</label>
+                <output for="slider-b" id="val-b" class="slider-value">0.0</output>
+              </div>
+              <input type="range" id="slider-b" class="custom-slider" min="-5" max="5" step="0.1" value="0">
+            </div>
+
+            <div class="slider-control">
+              <div class="slider-header">
+                <label for="slider-c" id="label-c" class="slider-label">Parámetro C</label>
+                <output for="slider-c" id="val-c" class="slider-value">0.0</output>
+              </div>
+              <input type="range" id="slider-c" class="custom-slider" min="-5" max="5" step="0.1" value="0">
+            </div>
+          </div>
+
+          <!-- Botones de control de animación -->
+          <div class="action-buttons">
+            <button type="button" id="btn-animar" class="btn-pill btn-primary" aria-pressed="true">
+              <span aria-hidden="true">⏸</span> Pausar
+            </button>
+            <button type="button" id="btn-reiniciar" class="btn-pill btn-secondary">
+              <span aria-hidden="true">↺</span> Reiniciar
+            </button>
+          </div>
+        </aside>
+
+        <!-- Columna 2: Lienzo animado (Canvas) + Fórmula en vivo -->
+        <article class="card stage-card" aria-label="Visualización animada y fórmula en vivo">
+          <div class="stage-top">
+            <div>
+              <h3 id="titulo-tema" class="topic-title">Cargando tema...</h3>
+              <p id="subtitulo-tema" class="topic-category">Categoría</p>
+            </div>
+            <div class="live-indicator" aria-live="polite">
+              <span class="pulse-dot" id="punto-estado" aria-hidden="true"></span>
+              <span id="texto-estado">Animando</span>
+            </div>
+          </div>
+
+          <div class="canvas-container">
+            <canvas
+              id="canvas-principal"
+              width="900"
+              height="520"
+              role="img"
+              aria-label="Gráfica interactiva animada del tema seleccionado"
+            >
+              Tu navegador no soporta el elemento Canvas HTML5.
+            </canvas>
+          </div>
+
+          <!-- Caja de fórmula en vivo -->
+          <div class="formula-box" aria-live="polite">
+            <span class="formula-tag">Fórmula en vivo</span>
+            <p id="formula-vivo" class="formula-text">y = ax + b</p>
+          </div>
+        </article>
+
+        <!-- Columna 3: Explicación cotidiana + Ejemplo real + Lectura en vivo -->
+        <aside class="card info-card" aria-label="Explicación en lenguaje cotidiano y ejemplo de la vida real">
+          <div class="info-block">
+            <h4 class="info-heading"><span aria-hidden="true">💬</span> ¿Qué estás viendo? (Sin enredos)</h4>
+            <p id="explicacion-simple" class="info-text"></p>
+          </div>
+
+          <div class="info-block real-world-block">
+            <h4 class="info-heading"><span aria-hidden="true">🌍</span> Ejemplo de la vida real</h4>
+            <p id="ejemplo-real" class="info-text"></p>
+          </div>
+
+          <div class="info-block live-insight-block" aria-live="polite">
+            <h4 class="info-heading"><span aria-hidden="true">⚡</span> Lo que pasa ahora con tus sliders</h4>
+            <p id="lectura-vivo" class="info-text"></p>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Catálogo visual rápido del nivel actual -->
+      <section class="catalog-section" aria-label="Explorar todos los temas del nivel seleccionado">
+        <div class="catalog-header">
+          <h3 id="titulo-catalogo">Temas disponibles en este nivel</h3>
+          <span id="contador-catalogo" class="pill-tag">0 temas</span>
+        </div>
+        <div id="grid-temas" class="topics-grid"></div>
+      </section>
+    </section>
+
+    <!-- PANEL 3: MODO FÁCIL -->
+    <section id="panel-facil" class="tab-panel fade-in" role="tabpanel" aria-labelledby="tab-facil" hidden>
+      <div class="section-intro">
+        <h2>Modo Fácil: Cero fórmulas, pura intuición</h2>
+        <p>Si las ecuaciones te dan dolor de cabeza, empieza aquí. Elige una idea cotidiana y mira cómo cobran vida las matemáticas y la física.</p>
+      </div>
+      <div id="grid-modo-facil" class="easy-grid"></div>
+    </section>
+
+    <!-- PANEL 4: QUIZ / RETO -->
+    <section id="panel-quiz" class="tab-panel fade-in" role="tabpanel" aria-labelledby="tab-quiz" hidden>
+      <div class="section-intro">
+        <h2>Quiz</h2>
+        <p>Responde estas 5 preguntas rápidas. Al elegir tu respuesta verás una explicación animada en vivo para confirmar el porqué.</p>
+      </div>
+
+      <div class="quiz-layout">
+        <article class="card quiz-card" aria-live="polite">
+          <div class="quiz-progress-bar">
+            <div class="quiz-meta">
+              <span id="quiz-paso" class="pill-tag">Pregunta 1 de 5</span>
+              <span id="quiz-puntaje" class="pill-tag pill-level">Puntaje: 0 / 5</span>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <div id="quiz-progreso-fill" class="progress-fill"></div>
+            </div>
+          </div>
+
+          <h3 id="quiz-pregunta" class="quiz-question">Pregunta...</h3>
+          <div id="quiz-opciones" class="quiz-options" role="radiogroup" aria-label="Opciones de respuesta"></div>
+
+          <div id="quiz-feedback" class="quiz-feedback" hidden>
+            <p id="quiz-feedback-titulo" class="feedback-title"></p>
+            <p id="quiz-feedback-texto" class="feedback-text"></p>
+          </div>
+
+          <div class="quiz-actions">
+            <button type="button" id="btn-quiz-siguiente" class="btn-pill btn-primary" hidden>Siguiente pregunta →</button>
+            <button type="button" id="btn-quiz-reiniciar" class="btn-pill btn-secondary">↺ Reiniciar reto</button>
+          </div>
+        </article>
+
+        <aside class="card quiz-visual-card" aria-label="Demostración animada del quiz">
+          <div class="card-header">
+            <span class="pill-tag">Demostración animada</span>
+          </div>
+          <div class="canvas-container">
+            <canvas
+              id="canvas-quiz"
+              width="640"
+              height="400"
+              role="img"
+              aria-label="Explicación visual animada de la pregunta del quiz"
+            ></canvas>
+          </div>
+          <p id="quiz-caption" class="quiz-caption">Elige una respuesta para activar la demostración animada.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <p><strong>Proyecto de: "Jorge Uriel Rosas Diaz, Dulce Maria de Jesus Reyes de la Cruz y Adrian Manuel Flores Zaragoza "</strong></p>
+  </footer>
+  <script src="script.js" defer></script>
+</body>
+</html>
