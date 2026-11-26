@@ -61,7 +61,7 @@
           aria-label="Cambiar entre modo oscuro y modo claro"
           aria-pressed="false"
         >
-          <span id="icono-tema" aria-hidden="true">☀️</span>
+          <span id="icono-tema" aria-hidden="true"></span>
           <span id="texto-tema">Modo Claro</span>
         </button>
       </div>
@@ -130,9 +130,9 @@
           <div class="selector-group">
             <label for="select-nivel" class="field-label">Nivel académico</label>
             <select id="select-nivel" class="styled-select">
-              <option value="basico">Nivel Básico / Propedéutico</option>
-              <option value="intermedio">Nivel Intermedio / Tronco Común</option>
-              <option value="avanzado">Nivel Avanzado / Especialidad</option>
+              <option value="basico">Nivel Básico</option>
+              <option value="intermedio">Nivel Intermedio</option>
+              <option value="avanzado">Nivel Avanzado</option>
             </select>
           </div>
 
@@ -216,17 +216,23 @@
         <!-- Columna 3: Explicación cotidiana + Ejemplo real + Lectura en vivo -->
         <aside class="card info-card" aria-label="Explicación en lenguaje cotidiano y ejemplo de la vida real">
           <div class="info-block">
-            <h4 class="info-heading"><span aria-hidden="true">💬</span> ¿Qué estás viendo? (Sin enredos)</h4>
+            <h4 class="info-heading"><span aria-hidden="true">
+              <i class="fa-solid fa-comment-dots fa-fade" style="color: rgb(255, 212, 59);"></i>
+            </span> ¿Qué estás viendo?</h4>
             <p id="explicacion-simple" class="info-text"></p>
           </div>
 
           <div class="info-block real-world-block">
-            <h4 class="info-heading"><span aria-hidden="true">🌍</span> Ejemplo de la vida real</h4>
+            <h4 class="info-heading"><span aria-hidden="true">
+              <i class="fa-solid fa-earth-americas fa-spin-pulse" style="color: rgb(255, 212, 59);"></i>
+            </span> Ejemplo de la vida real</h4>
             <p id="ejemplo-real" class="info-text"></p>
           </div>
 
           <div class="info-block live-insight-block" aria-live="polite">
-            <h4 class="info-heading"><span aria-hidden="true">⚡</span> Lo que pasa ahora con tus sliders</h4>
+            <h4 class="info-heading"><span>
+              <i class="fa-solid fa-bolt-lightning fa-flip" style="color: rgb(255, 212, 59);"></i>
+            </span> Lo que pasa ahora</h4>
             <p id="lectura-vivo" class="info-text"></p>
           </div>
         </aside>

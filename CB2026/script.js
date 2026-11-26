@@ -4356,7 +4356,6 @@ function configurarTemaVisual() {
   const aplicar = (modo) => {
     document.documentElement.dataset.theme = modo;
     const esClaro = modo === "light";
-    dom.iconoTema.textContent = esClaro ? "🌙" : "☀️";
     dom.textoTema.textContent = esClaro ? "Modo Oscuro" : "Modo Claro";
     dom.btnTema.setAttribute("aria-pressed", String(esClaro));
     try { localStorage.setItem("visualmath_theme", modo); } catch (_) {}
